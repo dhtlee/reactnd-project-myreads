@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import BookList from 'book-list';
+import * as BooksAPI from 'api/books';
+
+const Shelf = {
+  CURRENTLY_READING: 'currentlyReading',
+  WANT_TO_READ: 'wantToRead',
+  READ: 'read'
+}
+
 class MainPage extends Component {
+  state = {
+    books: []
+  }
+
+  componentDidMount = () => {
+    BooksAPI.getAll().then(books => {
+      this.setState({ books });
+    });
+  }
+
   render() {
     return (
       <div className="list-books">
@@ -12,12 +31,21 @@ class MainPage extends Component {
           <div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Currently Reading</h2>
+              <div className="bookshelf-books">
+                <BookList list={this.state.books.filter(book => book.shelf === Shelf.CURRENTLY_READING)}/>
+              </div>
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Want to Read</h2>
+              <div className="bookshelf-books">
+                <BookList list={this.state.books.filter(book => book.shelf === Shelf.WANT_TO_READ)}/>
+              </div>
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Read</h2>
+              <div className="bookshelf-books">
+                <BookList list={this.state.books.filter(book => book.shelf === Shelf.READ)}/>
+              </div>
             </div>
           </div>
           <div className="open-search">

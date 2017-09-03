@@ -5,20 +5,21 @@ import { Link } from 'react-router-dom';
 import * as BooksAPI from 'api/books'
 import BookList from 'book-list';
 
+const maxResults = 20;
+
 class SearchPage extends Component {
   static propTypes = {
     handleShelfUpdate: PropTypes.func.isRequired
   }
 
   state = {
-    maxResults: 20,
     results: []
   }
 
   searchBooks = (event) => {
     const query = event.target.value.trim();
     if (query.length >= 3) {
-      BooksAPI.search(query, this.state.maxResults)
+      BooksAPI.search(query, maxResults)
         .then(results => {
           this.setState({ results })
         })

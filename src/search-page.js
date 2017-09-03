@@ -34,9 +34,11 @@ class SearchPage extends Component {
             />
           </div>
         </div>
-        <div className="search-books-results">
-          <BookList list={this.state.results}/>
-        </div>
+        { this.state.results.length !== 0 && (
+          <div className="search-books-results">
+            <BookList list={this.state.results}/>
+          </div> 
+        )}
       </div>
     )
   }

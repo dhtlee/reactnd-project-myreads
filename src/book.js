@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 const Book = (props) => {
-  const { imageLink, title, authors } = props;
+  const { id, imageLink, title, authors, handleShelfUpdate } = props;
   const thumbnail = imageLink && imageLink.thumbnail ? imageLink.thumbnail : null;
   return (
     <li>
@@ -10,7 +10,7 @@ const Book = (props) => {
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url('${thumbnail}')`}}></div>
           <div className="book-shelf-changer">
-            <select>
+            <select onChange={(event => handleShelfUpdate(id, event.target.value))}>
               <option value="none" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -29,7 +29,8 @@ const Book = (props) => {
 Book.propTypes = {
   imageLink: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  authors: PropTypes.array.isRequired
+  authors: PropTypes.array.isRequired,
+  handleShelfUpdate: PropTypes.func.isRequired
 }
 
 export default Book;

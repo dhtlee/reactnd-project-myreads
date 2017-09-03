@@ -21,8 +21,9 @@ class MainPage extends Component {
     });
   }
 
-  updateShelf = (bookId, shelf) => {
-    console.log(bookId + '-' + shelf);
+  updateShelf = (book, shelf) => {
+      console.log(book);
+      console.log(shelf);
   }
 
   render() {

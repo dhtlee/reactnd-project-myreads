@@ -8,11 +8,8 @@ const BookList = (props) => (
     { 
       props.list.map((book) => 
         <Book
-          imageLink={book.imageLinks}
           key={book.id}
-          id={book.id}
-          title={book.title}
-          authors={book.authors}
+          book={book}
           handleShelfUpdate={props.handleShelfUpdate}
         />
       )

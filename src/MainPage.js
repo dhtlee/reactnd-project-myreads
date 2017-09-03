@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class MainPage extends Component {
   render() {
@@ -18,6 +19,9 @@ class MainPage extends Component {
             <div className="bookshelf">
               <h2 className="bookshelf-title">Read</h2>
             </div>
+          </div>
+          <div className="open-search">
+            <Link to='/search'/>
           </div>
         </div>
       </div>

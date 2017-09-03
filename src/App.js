@@ -11,9 +11,20 @@ class App extends Component {
     books: []
   }
 
-  updateShelf = (book, shelf) => {
-    console.log(book);
-    console.log(shelf);
+  updateShelf = (updatedBook, shelf) => {
+    BooksAPI.update({ id: updatedBook.id }, shelf).then(response => {
+      const book = this.state.books.find(book => book.id === updatedBook.id);
+      const newBook = Object.assign({}, book, { shelf: shelf });
+      const index = this.state.books.findIndex(book => book.id === updatedBook.id);
+      this.setState({
+        books: [
+          ...this.state.books.slice(0, index),
+          newBook,
+          ...this.state.books.slice(index + 1)
+        ]
+      });
+    })
+  }
 
   componentDidMount = () => {
     BooksAPI.getAll().then(books => {

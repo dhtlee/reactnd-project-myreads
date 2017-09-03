@@ -6,7 +6,7 @@ import Book from './Book';
 
 class SearchPage extends Component {
   state = {
-    maxResults: 20,
+    maxResults: 20, // TODO: Add functionality to change this 
     results: []
   }
 

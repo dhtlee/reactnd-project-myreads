@@ -1,8 +1,9 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 const Book = (props) => {
-  const { imgLink, title, authors } = props;
-  const thumbnail = imgLink && imgLink.thumbnail ? imgLink.thumbnail : null;
+  const { imageLink, title, authors } = props;
+  const thumbnail = imageLink && imageLink.thumbnail ? imageLink.thumbnail : null;
   return (
     <li>
       <div className="book">
@@ -23,6 +24,12 @@ const Book = (props) => {
       </div>
     </li>
   )
+}
+
+Book.propTypes = {
+  imageLink: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  authors: PropTypes.array.isRequired
 }
 
 export default Book;

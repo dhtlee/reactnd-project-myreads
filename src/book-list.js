@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 import Book from 'book';
 
@@ -7,7 +8,7 @@ const BookList = (props) => (
     { 
       props.list.map((book) => 
         <Book
-          imgLink={book.imageLinks}
+          imageLink={book.imageLinks}
           key={book.id}
           title={book.title}
           authors={book.authors}  
@@ -16,5 +17,9 @@ const BookList = (props) => (
     }
   </ol>
 )
+
+BookList.propTypes = {
+  list: PropTypes.array.isRequired
+}
 
 export default BookList;

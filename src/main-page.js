@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import BookList from 'book-list';
+import BookShelf from 'bookshelf';
 
 const Shelf = {
   CURRENTLY_READING: 'currentlyReading',
@@ -17,33 +18,21 @@ const MainPage = (props) => (
     </div>
     <div className="list-books-content">
       <div>
-        <div className="bookshelf">
-          <h2 className="bookshelf-title">Currently Reading</h2>
-          <div className="bookshelf-books">
-            <BookList 
-              list={props.books.filter(book => book.shelf === Shelf.CURRENTLY_READING)}
-              handleShelfUpdate={props.handleShelfUpdate}
-            />
-          </div>
-        </div>
-        <div className="bookshelf">
-          <h2 className="bookshelf-title">Want to Read</h2>
-          <div className="bookshelf-books">
-            <BookList 
-              list={props.books.filter(book => book.shelf === Shelf.WANT_TO_READ)}
-              handleShelfUpdate={props.handleShelfUpdate}
-            />
-          </div>
-        </div>
-        <div className="bookshelf">
-          <h2 className="bookshelf-title">Read</h2>
-          <div className="bookshelf-books">
-            <BookList 
-              list={props.books.filter(book => book.shelf === Shelf.READ)}
-              handleShelfUpdate={props.handleShelfUpdate}
-            />
-          </div>
-        </div>
+        <BookShelf 
+          name='Currently Reading' 
+          books={props.books.filter(book => book.shelf === Shelf.CURRENTLY_READING)}
+          handleShelfUpdate={props.handleShelfUpdate}
+        />
+        <BookShelf 
+          name='Want to Read' 
+          books={props.books.filter(book => book.shelf === Shelf.WANT_TO_READ)}
+          handleShelfUpdate={props.handleShelfUpdate}
+        />
+        <BookShelf 
+          name='Read' 
+          books={props.books.filter(book => book.shelf === Shelf.READ)}
+          handleShelfUpdate={props.handleShelfUpdate}
+        />
       </div>
       <div className="open-search">
         <Link to='/search'/>

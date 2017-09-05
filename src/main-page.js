@@ -2,7 +2,6 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import BookList from 'book-list';
 import BookShelf from 'bookshelf';
 
 const Shelf = {

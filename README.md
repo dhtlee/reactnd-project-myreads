@@ -9,5 +9,5 @@ This is the first project for Udacity's React Fundamentals course.
 
 ### Setting up environment
 1. Clone this repo: `git clone https://github.com/dhtlee/reactnd-project-myreads.git`
-1. Install dependencies: `npm install`
-1. Start application: `npm run start`
+2. Install dependencies: `npm install`
+3. Start application: `npm start`

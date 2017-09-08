@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
+import { debounce } from 'throttle-debounce';
 
 import * as BooksAPI from 'api/books'
 import BookList from 'book-list';
@@ -29,21 +30,22 @@ class SearchPage extends Component {
     });
   }
 
-  searchBooks = (event) => {
-    const query = event.target.value.trim();
-    if (query.length >= 3) {
-      BooksAPI.search(query, maxResults)
-        .then(response => {
-          this.props.books.forEach(shelvedBook => {
-            const match = response.find((resultBook) => resultBook.id === shelvedBook.id);
-            if (match) {
-              match.shelf = shelvedBook.shelf;  
-            }
-          })
-          this.setState({ results: response });
-      });
-    }
+  onChange = (event) => {
+    this.searchBooks(event.target.value.trim());
   }
+
+  searchBooks = debounce(1000, (query) => {
+    BooksAPI.search(query, maxResults)
+      .then(response => {
+        this.props.books.forEach(shelvedBook => {
+          const match = response.find((resultBook) => resultBook.id === shelvedBook.id);
+          if (match) {
+            match.shelf = shelvedBook.shelf;  
+          }
+        })
+        this.setState({ results: response });
+    });
+  })
 
   render() {
     return (
@@ -54,7 +56,7 @@ class SearchPage extends Component {
             <input 
               type='text'
               placeholder='Search by title or author'
-              onChange={this.searchBooks}
+              onChange={this.onChange}
             />
           </div>
         </div>
